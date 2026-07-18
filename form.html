@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block titre %}Nouveau médecin{% endblock %}
+{% block contenu %}
+<h1>Nouveau médecin</h1>
+<form class="formulaire" method="post">
+  <div class="ligne">
+    <div><label>Nom</label><input type="text" name="nom" required></div>
+    <div><label>Prénom</label><input type="text" name="prenom" required></div>
+  </div>
+  <label>Spécialité</label>
+  <input type="text" name="specialite" placeholder="ex: pédiatrie générale, néonatalogie" required>
+  <label>Numéro d'ordre (fictif)</label>
+  <input type="text" name="numero_ordre" required>
+  <p style="margin-top:1.2rem;"><button class="btn" type="submit">Enregistrer</button></p>
+</form>
+{% endblock %}

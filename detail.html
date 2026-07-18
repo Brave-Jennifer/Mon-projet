@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block titre %}{{ medecin.nom_complet }}{% endblock %}
+{% block contenu %}
+<h1>{{ medecin.nom_complet }}</h1>
+<p><strong>Spécialité :</strong> {{ medecin.specialite }}</p>
+<p><strong>N° d'ordre :</strong> {{ medecin.numero_ordre }}</p>
+
+<div class="card">
+  <h2>Consultations à venir</h2>
+  <table>
+    <thead><tr><th>Date</th><th>Patient</th><th>Motif</th><th>Statut</th></tr></thead>
+    <tbody>
+      {% for c in medecin.consultations|sort(attribute='date_heure') %}
+      <tr>
+        <td>{{ c.date_heure.strftime('%d/%m/%Y %H:%M') }}</td>
+        <td>{{ c.patient.nom_complet }}</td>
+        <td>{{ c.motif }}</td>
+        <td><span class="badge badge-{{ c.statut }}">{{ c.statut }}</span></td>
+      </tr>
+      {% else %}
+      <tr><td colspan="4">Aucune consultation.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

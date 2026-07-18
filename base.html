@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block titre %}CHU Enfants-Santé — Pédiatrie{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <div class="logo">🏥 CHU Enfants-Santé <span>Service Pédiatrie</span></div>
+  <nav>
+    <a href="{{ url_for('main.accueil') }}">Accueil</a>
+    <a href="{{ url_for('patients.liste') }}">Patients</a>
+    <a href="{{ url_for('medecins.liste') }}">Médecins</a>
+    <a href="{{ url_for('consultations.agenda') }}">Agenda</a>
+    <a href="{{ url_for('hospitalisations.liste') }}">Hospitalisations</a>
+    <a href="{{ url_for('stats.dashboard') }}">Statistiques</a>
+  </nav>
+</header>
+
+<main class="conteneur">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-zone">
+        {% for categorie, message in messages %}
+          <div class="flash flash-{{ categorie }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  {% block contenu %}{% endblock %}
+</main>
+
+<footer class="footer">
+  Système d'information Pédiatrie — Projet académique — {{ indicateurs.date_actualisation if indicateurs is defined else '' }}
+</footer>
+</body>
+</html>

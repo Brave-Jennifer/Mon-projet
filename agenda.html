@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block titre %}Agenda des consultations{% endblock %}
+{% block contenu %}
+<h1>Agenda des consultations</h1>
+<p><a class="btn" href="{{ url_for('consultations.creer') }}">+ Planifier une consultation</a></p>
+
+<form class="formulaire" method="get" style="max-width:100%; display:flex; gap:1rem; flex-wrap:wrap; align-items:end;">
+  <div>
+    <label>Médecin</label>
+    <select name="medecin_id">
+      <option value="">Tous</option>
+      {% for m in medecins %}
+      <option value="{{ m.id }}" {% if medecin_id == m.id %}selected{% endif %}>{{ m.nom_complet }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div><label>Motif</label><input type="text" name="motif" value="{{ motif }}"></div>
+  <div><label>Du</label><input type="date" name="date_debut" value="{{ date_debut or '' }}"></div>
+  <div><label>Au</label><input type="date" name="date_fin" value="{{ date_fin or '' }}"></div>
+  <div><button class="btn" type="submit">Filtrer</button></div>
+</form>
+
+<table style="margin-top:1rem;">
+  <thead><tr><th>Date</th><th>Patient</th><th>Médecin</th><th>Motif</th><th>Durée</th><th>Statut</th><th></th></tr></thead>
+  <tbody>
+    {% for c in consultations %}
+    <tr>
+      <td>{{ c.date_heure.strftime('%d/%m/%Y %H:%M') }}</td>
+      <td>{{ c.patient.nom_complet }}</td>
+      <td>{{ c.medecin.nom_complet }}</td>
+      <td>{{ c.motif }}</td>
+      <td>{{ c.duree_minutes }} min</td>
+      <td><span class="badge badge-{{ c.statut }}">{{ c.statut }}</span></td>
+      <td><a class="btn" href="{{ url_for('consultations.suivi', consultation_id=c.id) }}">Suivi</a></td>
+    </tr>
+    {% else %}
+    <tr><td colspan="7">Aucune consultation pour ces critères.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

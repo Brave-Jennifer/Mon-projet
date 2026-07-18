@@ -1,0 +1,168 @@
+:root {
+  --primaire: #c0392b;
+  --primaire-fonce: #7f2315;
+  --accent: #e8746a;
+  --fond: #fdf5f4;
+  --texte: #2a1a17;
+  --danger: #8b1a10;
+  --succes: #2e7d5b;
+  --info: #2f6690;
+  --bordure: #f0d5d1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--fond);
+  color: var(--texte);
+}
+
+.topbar {
+  background: var(--primaire-fonce);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1.5rem;
+  flex-wrap: wrap;
+}
+
+.logo { font-weight: 700; font-size: 1.1rem; }
+.logo span { display: block; font-weight: 400; font-size: 0.75rem; opacity: 0.85; }
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 1.2rem;
+  font-size: 0.92rem;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+}
+nav a:hover { border-bottom: 2px solid var(--accent); }
+
+.conteneur {
+  max-width: 1100px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+}
+
+.flash-zone { margin-bottom: 1rem; }
+.flash {
+  padding: 0.7rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+.flash-success { background: #e2f4ea; color: var(--succes); border: 1px solid var(--succes); }
+.flash-danger  { background: #fbeae8; color: var(--danger); border: 1px solid var(--danger); }
+.flash-info    { background: #e7f1f9; color: var(--info); border: 1px solid var(--info); }
+
+h1, h2, h3 { color: var(--primaire-fonce); }
+
+.card {
+  background: white;
+  border: 1px solid var(--bordure);
+  border-radius: 10px;
+  padding: 1.2rem;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.grille-indicateurs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.indicateur {
+  background: white;
+  border-left: 4px solid var(--primaire);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.indicateur .valeur { font-size: 1.8rem; font-weight: 700; color: var(--primaire-fonce); }
+.indicateur .label { font-size: 0.82rem; color: #667; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+th, td {
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid var(--bordure);
+  text-align: left;
+  font-size: 0.92rem;
+}
+th { background: var(--primaire); color: white; font-weight: 600; }
+tr:hover td { background: #fdeceb; }
+
+.btn {
+  display: inline-block;
+  background: var(--primaire);
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.btn:hover { background: var(--primaire-fonce); }
+.btn-danger { background: var(--danger); }
+.btn-danger:hover { background: #96271b; }
+.btn-secondaire { background: #7a8a90; }
+
+form.formulaire { max-width: 640px; }
+form.formulaire label {
+  display: block;
+  margin: 0.7rem 0 0.25rem;
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+form.formulaire input,
+form.formulaire select,
+form.formulaire textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--bordure);
+  border-radius: 6px;
+  font-size: 0.92rem;
+}
+form.formulaire .ligne { display: flex; gap: 1rem; }
+form.formulaire .ligne > div { flex: 1; }
+
+.graphique-img { max-width: 100%; border-radius: 8px; border: 1px solid var(--bordure); }
+
+.barre-recherche { margin-bottom: 1rem; display: flex; gap: 0.5rem; }
+.barre-recherche input { flex: 1; padding: 0.5rem; border-radius: 6px; border: 1px solid var(--bordure); }
+
+.footer {
+  text-align: center;
+  padding: 1rem;
+  color: #7a8a90;
+  font-size: 0.8rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.badge-planifiee { background: #e7f1f9; color: var(--info); }
+.badge-confirmee { background: #eaf6ee; color: var(--succes); }
+.badge-terminee  { background: #f0f0f0; color: #555; }
+.badge-annulee   { background: #fbeae8; color: var(--danger); }
+
+@media (max-width: 700px) {
+  .topbar { flex-direction: column; align-items: flex-start; }
+  nav a { margin-left: 0; margin-right: 1rem; }
+  form.formulaire .ligne { flex-direction: column; }
+}

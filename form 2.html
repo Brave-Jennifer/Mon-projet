@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block titre %}Nouvelle consultation{% endblock %}
+{% block contenu %}
+<h1>Planifier une consultation</h1>
+<form class="formulaire" method="post">
+  <label>Patient</label>
+  <select name="patient_id" required>
+    {% for p in patients %}
+    <option value="{{ p.id }}">{{ p.nom_complet }} ({{ p.identifiant_public }})</option>
+    {% endfor %}
+  </select>
+
+  <label>Médecin</label>
+  <select name="medecin_id" required>
+    {% for m in medecins %}
+    <option value="{{ m.id }}">{{ m.nom_complet }} — {{ m.specialite }}</option>
+    {% endfor %}
+  </select>
+
+  <div class="ligne">
+    <div><label>Date et heure</label><input type="datetime-local" name="date_heure" required></div>
+    <div><label>Durée</label>
+      <select name="duree_minutes">
+        <option value="15">15 minutes</option>
+        <option value="30" selected>30 minutes</option>
+        <option value="60">60 minutes</option>
+      </select>
+    </div>
+  </div>
+
+  <label>Motif de la consultation</label>
+  <input type="text" name="motif" required>
+
+  <p style="margin-top:1.2rem;"><button class="btn" type="submit">Planifier</button></p>
+</form>
+{% endblock %}

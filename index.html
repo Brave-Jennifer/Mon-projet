@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block titre %}Accueil — Pédiatrie{% endblock %}
+{% block contenu %}
+<h1>Tableau de bord du service</h1>
+<p>Vue d'ensemble actualisée le {{ indicateurs.date_actualisation }}.</p>
+
+<div class="grille-indicateurs">
+  <div class="indicateur">
+    <div class="valeur">{{ indicateurs.nb_patients }}</div>
+    <div class="label">Patients suivis</div>
+  </div>
+  <div class="indicateur">
+    <div class="valeur">{{ indicateurs.nb_consultations }}</div>
+    <div class="label">Consultations enregistrées</div>
+  </div>
+  <div class="indicateur">
+    <div class="valeur">{{ indicateurs.lits_occupes }}</div>
+    <div class="label">Lits occupés</div>
+  </div>
+  <div class="indicateur">
+    <div class="valeur">{{ indicateurs.taux_occupation_pct }}%</div>
+    <div class="label">Taux d'occupation</div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Accès rapide</h2>
+  <p>
+    <a class="btn" href="{{ url_for('patients.creer') }}">+ Nouveau patient</a>
+    <a class="btn" href="{{ url_for('consultations.creer') }}">+ Planifier une consultation</a>
+    <a class="btn btn-secondaire" href="{{ url_for('stats.dashboard') }}">Voir les statistiques</a>
+  </p>
+</div>
+{% endblock %}

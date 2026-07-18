@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block titre %}Statistiques{% endblock %}
+{% block contenu %}
+<h1>Dashboard statistique</h1>
+
+<div class="grille-indicateurs">
+  <div class="indicateur"><div class="valeur">{{ indicateurs.nb_patients }}</div><div class="label">Patients</div></div>
+  <div class="indicateur"><div class="valeur">{{ indicateurs.nb_consultations }}</div><div class="label">Consultations</div></div>
+  <div class="indicateur"><div class="valeur">{{ occupation.taux_pct }}%</div><div class="label">Occupation des lits ({{ occupation.lits_occupes }}/{{ occupation.lits_total }})</div></div>
+  <div class="indicateur"><div class="valeur">{{ attente.duree_moyenne_minutes }} min</div><div class="label">Durée moyenne de consultation</div></div>
+</div>
+
+<div class="card">
+  <h2>Pyramide des âges</h2>
+  <img class="graphique-img" src="{{ url_for('static', filename='graphs/' ~ graphiques.pyramide_ages) }}" alt="Pyramide des âges">
+</div>
+
+<div class="card">
+  <h2>Top 10 des diagnostics</h2>
+  <img class="graphique-img" src="{{ url_for('static', filename='graphs/' ~ graphiques.top_diagnostics) }}" alt="Top diagnostics">
+</div>
+
+<div class="card">
+  <h2>Évolution mensuelle des consultations</h2>
+  <img class="graphique-img" src="{{ url_for('static', filename='graphs/' ~ graphiques.evolution_consultations) }}" alt="Évolution consultations">
+</div>
+
+<div class="card">
+  <h2>Durée moyenne d'hospitalisation par pathologie</h2>
+  <img class="graphique-img" src="{{ url_for('static', filename='graphs/' ~ graphiques.repartition_hospitalisations) }}" alt="Hospitalisations">
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block titre %}Hospitalisations{% endblock %}
+{% block contenu %}
+<h1>Hospitalisations</h1>
+<p><a class="btn" href="{{ url_for('hospitalisations.creer') }}">+ Nouvelle admission</a></p>
+
+<table>
+  <thead><tr><th>Patient</th><th>Entrée</th><th>Motif</th><th>Chambre</th><th>Statut</th><th></th></tr></thead>
+  <tbody>
+    {% for h in hospitalisations %}
+    <tr>
+      <td>{{ h.patient.nom_complet }}</td>
+      <td>{{ h.date_entree.strftime('%d/%m/%Y %H:%M') }}</td>
+      <td>{{ h.motif }}</td>
+      <td>{{ h.chambre or '—' }}</td>
+      <td>{{ 'En cours' if h.en_cours else 'Sortie (' + (h.mode_sortie or '—') + ')' }}</td>
+      <td>
+        {% if h.en_cours %}
+        <form method="post" action="{{ url_for('hospitalisations.ajouter_suivi', hospitalisation_id=h.id) }}" style="display:inline">
+          <input type="hidden" name="etat_clinique" value="stable">
+          <button class="btn btn-secondaire" type="submit" title="Ajouter un suivi rapide (stable)">+ Suivi rapide</button>
+        </form>
+        {% endif %}
+      </td>
+    </tr>
+    {% else %}
+    <tr><td colspan="6">Aucune hospitalisation enregistrée.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

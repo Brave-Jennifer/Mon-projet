@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block titre %}Médecins{% endblock %}
+{% block contenu %}
+<h1>Médecins pédiatres</h1>
+<p><a class="btn" href="{{ url_for('medecins.creer') }}">+ Nouveau médecin</a></p>
+<table>
+  <thead><tr><th>Nom</th><th>Spécialité</th><th>N° d'ordre</th><th></th></tr></thead>
+  <tbody>
+    {% for m in medecins %}
+    <tr>
+      <td>{{ m.nom_complet }}</td>
+      <td>{{ m.specialite }}</td>
+      <td>{{ m.numero_ordre }}</td>
+      <td><a class="btn" href="{{ url_for('medecins.detail', medecin_id=m.id) }}">Voir</a></td>
+    </tr>
+    {% else %}
+    <tr><td colspan="4">Aucun médecin enregistré.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
